@@ -1,0 +1,55 @@
+{
+  "name": "@folio/plugin-resource-registry",
+  "version": "1.0.0",
+  "description": "frontend resource registry plugin for Stripes",
+  "publishConfig": {
+    "registry": "https://repository.folio.org/repository/npm-folio/"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "scripts": {
+    "test": "stripes test karma",
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "@bigtest/interactor": "^0.9.1",
+    "@bigtest/mocha": "^0.5.2",
+    "@bigtest/react": "^0.1.2",
+    "@folio/eslint-config-stripes": "^5.2.0",
+    "babel-eslint": "^9.0.0",
+    "chai": "^4.2.0",
+    "chai-spies": "^1.0.0",
+    "core-js": "^3.6.1",
+    "eslint": "^6.2.1",
+    "faker": "^4.1.0",
+    "inflected": "^2.0.4",
+    "miragejs": "^0.1.40",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-intl": "^5.8.1",
+    "react-router-dom": "^5.2.0",
+    "regenerator-runtime": "^0.13.3"
+  },
+  "dependencies": {
+    "dom-helpers": "^3.4.0",
+    "lodash": "^4.17.11",
+    "prop-types": "^15.6.0",
+    "urijs": "^1.19.6"
+  },
+  "peerDependencies": {
+    "@folio/stripes": "^6.0.0",
+    "react": "*",
+    "react-intl": "^5.8.1",
+    "react-router-dom": "^5.2.0"
+  },
+  "stripes": {
+    "actsAs": [
+      "plugin"
+    ],
+    "pluginType": "resource-registry",
+    "displayName": "ui-plugin-resource-registry.meta.title",
+    "permissionSets": []
+  }
+}
