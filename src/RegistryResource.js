@@ -18,6 +18,7 @@ class RegistryResource {
     this.viewAllTemplate = template;
   }
 
+  // This should take in the object itself, and return the url path of that object in a FOLIO app
   addViewTemplate = (template) => {
     this.viewTemplate = template;
   }
@@ -30,17 +31,8 @@ class RegistryResource {
     return this.viewAllTemplate;
   }
 
-  performViewAllTemplate = (templateParams) => {
-    return this.viewAllTemplate(templateParams);
-  }
-
   getViewTemplate = () => {
     return this.viewTemplate;
-  }
-
-  // This should take in the object itself, and return the url path of that object in a FOLIO app
-  performViewTemplate = (object) => {
-    return this.viewTemplate(object);
   }
 
   addLookupComponent = (component) => {
