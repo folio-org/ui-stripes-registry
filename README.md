@@ -1,4 +1,4 @@
-# ui-plugin-resource-registry
+# ui-stripes-registry
 
 Copyright (C) 2017-2019 The Open Library Foundation
 
