@@ -3,6 +3,8 @@ class RegistryResource {
    * These fields should be made private once
    * https://github.com/tc39/proposal-private-methods#private-methods-and-fields
    * is in ECMA officially.
+   *
+   * Alternative is the use of a 'publicApi' function as below
    */
   viewAll;
   viewAllTemplate;
@@ -22,7 +24,7 @@ class RegistryResource {
    */
 
   // Eventually we might want to convert these to TypeScript to enforce some of this.
-  linksMap = new Map(['viewResources', null], ['viewResource', null]);
+  linksMap = new Map([['viewResources', null], ['viewResource', null]]);
 
   setLink = (linkName, link) => {
     this.linksMap.set(linkName, link);
@@ -63,6 +65,19 @@ class RegistryResource {
   getRenderFunction = (name) => {
     return this.renderFunctionMap.get(name);
   };
+
+  publicApi = () => ({
+    setLink: this.setLink,
+    getLink: this.getLink,
+    setViewResource: this.setViewResource,
+    getViewResource: this.getViewResource,
+    setViewResources: this.setViewResources,
+    getViewResources: this.getViewResources,
+    addLookupComponent: this.addLookupComponent,
+    getLookupComponent: this.getLookupComponent,
+    setRenderFunction: this.setRenderFunction,
+    getRenderFunction: this.getRenderFunction
+  });
 }
 
 export default RegistryResource;
