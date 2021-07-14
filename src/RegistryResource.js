@@ -34,8 +34,8 @@ class RegistryResource {
     return this.linksMap.get(linkName);
   };
 
-  getLinksMap = () => {
-    return this.linksMap;
+  getLinkMap = () => {
+    return Object.fromEntries(this.linksMap);
   };
 
   setViewResource = (link) => {
@@ -73,7 +73,7 @@ class RegistryResource {
   publicApi = () => ({
     setLink: this.setLink,
     getLink: this.getLink,
-    getLinksMap: this.getLinksMap,
+    getLinkMap: this.getLinkMap,
     setViewResource: this.setViewResource,
     getViewResource: this.getViewResource,
     setViewResources: this.setViewResources,

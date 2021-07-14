@@ -6,6 +6,13 @@ const resourceMap = new Map();
 
 const Registry = {
 
+  getRegistry: () => {
+    // Return the Map above as an Object, exposing only the publicApi
+    return Object.fromEntries(
+      Array.from(resourceMap).map(([key, val]) => [key, val.publicApi()])
+    );
+  },
+
   getRegistryCount: () => {
     return resourceMap.size;
   },
