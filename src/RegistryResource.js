@@ -34,20 +34,24 @@ class RegistryResource {
     return this.linksMap.get(linkName);
   };
 
+  getLinksMap = () => {
+    return this.linksMap;
+  };
+
   setViewResource = (link) => {
-    this.linksMap.set('viewResource', link);
+    this.setLink('viewResource', link);
   };
 
   getViewResource = () => {
-    this.linksMap.get('viewResource');
+    return this.getLink('viewResource');
   };
 
   setViewResources = (link) => {
-    this.linksMap.set('viewResources', link);
+    this.setLink('viewResources', link);
   };
 
   getViewResources = () => {
-    this.linksMap.get('viewResources');
+    return this.getLink('viewResources');
   };
 
   addLookupComponent = (component) => {
@@ -69,6 +73,7 @@ class RegistryResource {
   publicApi = () => ({
     setLink: this.setLink,
     getLink: this.getLink,
+    getLinksMap: this.getLinksMap,
     setViewResource: this.setViewResource,
     getViewResource: this.getViewResource,
     setViewResources: this.setViewResources,

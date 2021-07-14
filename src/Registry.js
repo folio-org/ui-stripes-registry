@@ -23,10 +23,6 @@ const Registry = {
     return Registry.getResource(resourceName);
   },
 
-  getRegistry: () => {
-    return resourceMap;
-  },
-
   /* Use these to set up/fetch a custom render function for a specific field on a resource.
    * This should not be necessary for a simple resource.path.to.field display
    * but in cases such as returning a field from a speific element of an array,
