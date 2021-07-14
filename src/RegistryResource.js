@@ -10,46 +10,59 @@ class RegistryResource {
   lookupComponent;
   renderFunctionMap = new Map();
 
-  addViewAll = (getAllPath) => {
-    this.viewAll = getAllPath;
-  }
+  /* Contains key-value pairs where key is a string,
+   * and value is either a string or a function.
+   *
+   * A string will indicate a static path, ie /erm/agreements
+   * A function will indicate a path which contains variables, ie /erm/agreements/{id}
+   *
+   * For any of the 'default' keys (especially viewResources and viewResource)
+   * any functions provided will need to meet a set parameter shape in order
+   * that this can be used automatically and dynamically.
+   */
 
-  addViewAllTemplate = (template) => {
-    this.viewAllTemplate = template;
-  }
+  // Eventually we might want to convert these to TypeScript to enforce some of this.
+  linksMap = new Map(['viewResources', null], ['viewResource', null]);
 
-  // This should take in the object itself, and return the url path of that object in a FOLIO app
-  addViewTemplate = (template) => {
-    this.viewTemplate = template;
-  }
+  setLink = (linkName, link) => {
+    this.linksMap.set(linkName, link);
+  };
 
-  getViewAll = () => {
-    return this.viewAll;
-  }
+  getLink = (linkName) => {
+    return this.linksMap.get(linkName);
+  };
 
-  getViewAllTemplate = () => {
-    return this.viewAllTemplate;
-  }
+  setViewResource = (link) => {
+    this.linksMap.set('viewResource', link);
+  };
 
-  getViewTemplate = () => {
-    return this.viewTemplate;
-  }
+  getViewResource = () => {
+    this.linksMap.get('viewResource');
+  };
+
+  setViewResources = (link) => {
+    this.linksMap.set('viewResources', link);
+  };
+
+  getViewResources = () => {
+    this.linksMap.get('viewResources');
+  };
 
   addLookupComponent = (component) => {
     this.lookupComponent = component;
-  }
+  };
 
   getLookupComponent = () => {
     return this.lookupComponent;
-  }
+  };
 
   setRenderFunction = (name, func) => {
     this.renderFunctionMap.set(name, func);
-  }
+  };
 
   getRenderFunction = (name) => {
     return this.renderFunctionMap.get(name);
-  }
+  };
 }
 
 export default RegistryResource;
