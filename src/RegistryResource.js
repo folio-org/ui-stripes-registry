@@ -35,7 +35,7 @@ class RegistryResource {
   };
 
   getLinkMap = () => {
-    return Object.fromEntries(this.linksMap);
+    return this.linksMap;
   };
 
   setViewResource = (link) => {
@@ -54,7 +54,7 @@ class RegistryResource {
     return this.getLink('viewResources');
   };
 
-  addLookupComponent = (component) => {
+  setLookupComponent = (component) => {
     this.lookupComponent = component;
   };
 
@@ -78,7 +78,7 @@ class RegistryResource {
     getViewResource: this.getViewResource,
     setViewResources: this.setViewResources,
     getViewResources: this.getViewResources,
-    addLookupComponent: this.addLookupComponent,
+    setLookupComponent: this.setLookupComponent,
     getLookupComponent: this.getLookupComponent,
     setRenderFunction: this.setRenderFunction,
     getRenderFunction: this.getRenderFunction

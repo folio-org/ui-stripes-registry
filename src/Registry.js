@@ -8,7 +8,7 @@ const Registry = {
 
   getRegistry: () => {
     // Return the Map above as an Object, exposing only the publicApi
-    return Object.fromEntries(
+    return new Map(
       Array.from(resourceMap).map(([key, val]) => [key, val.publicApi()])
     );
   },
