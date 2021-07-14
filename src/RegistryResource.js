@@ -3,6 +3,8 @@ class RegistryResource {
    * These fields should be made private once
    * https://github.com/tc39/proposal-private-methods#private-methods-and-fields
    * is in ECMA officially.
+   *
+   * Alternative is the use of a 'publicApi' function as below
    */
   viewAll;
   viewAllTemplate;
@@ -10,46 +12,77 @@ class RegistryResource {
   lookupComponent;
   renderFunctionMap = new Map();
 
-  addViewAll = (getAllPath) => {
-    this.viewAll = getAllPath;
-  }
+  /* Contains key-value pairs where key is a string,
+   * and value is either a string or a function.
+   *
+   * A string will indicate a static path, ie /erm/agreements
+   * A function will indicate a path which contains variables, ie /erm/agreements/{id}
+   *
+   * For any of the 'default' keys (especially viewResources and viewResource)
+   * any functions provided will need to meet a set parameter shape in order
+   * that this can be used automatically and dynamically.
+   */
 
-  addViewAllTemplate = (template) => {
-    this.viewAllTemplate = template;
-  }
+  // Eventually we might want to convert these to TypeScript to enforce some of this.
+  linksMap = new Map([['viewResources', null], ['viewResource', null]]);
 
-  // This should take in the object itself, and return the url path of that object in a FOLIO app
-  addViewTemplate = (template) => {
-    this.viewTemplate = template;
-  }
+  setLink = (linkName, link) => {
+    this.linksMap.set(linkName, link);
+  };
 
-  getViewAll = () => {
-    return this.viewAll;
-  }
+  getLink = (linkName) => {
+    return this.linksMap.get(linkName);
+  };
 
-  getViewAllTemplate = () => {
-    return this.viewAllTemplate;
-  }
+  getLinkMap = () => {
+    return this.linksMap;
+  };
 
-  getViewTemplate = () => {
-    return this.viewTemplate;
-  }
+  setViewResource = (link) => {
+    this.setLink('viewResource', link);
+  };
 
-  addLookupComponent = (component) => {
+  getViewResource = () => {
+    return this.getLink('viewResource');
+  };
+
+  setViewResources = (link) => {
+    this.setLink('viewResources', link);
+  };
+
+  getViewResources = () => {
+    return this.getLink('viewResources');
+  };
+
+  setLookupComponent = (component) => {
     this.lookupComponent = component;
-  }
+  };
 
   getLookupComponent = () => {
     return this.lookupComponent;
-  }
+  };
 
   setRenderFunction = (name, func) => {
     this.renderFunctionMap.set(name, func);
-  }
+  };
 
   getRenderFunction = (name) => {
     return this.renderFunctionMap.get(name);
-  }
+  };
+
+  publicApi = () => ({
+    setLink: this.setLink,
+    getLink: this.getLink,
+    getLinkMap: this.getLinkMap,
+    setViewResource: this.setViewResource,
+    getViewResource: this.getViewResource,
+    setViewResources: this.setViewResources,
+    getViewResources: this.getViewResources,
+    setLookupComponent: this.setLookupComponent,
+    getLookupComponent: this.getLookupComponent,
+    setRenderFunction: this.setRenderFunction,
+    getRenderFunction: this.getRenderFunction
+  });
 }
 
 export default RegistryResource;

@@ -6,8 +6,19 @@ const resourceMap = new Map();
 
 const Registry = {
 
+  getRegistry: () => {
+    // Return the Map above as an Object, exposing only the publicApi
+    return new Map(
+      Array.from(resourceMap).map(([key, val]) => [key, val.publicApi()])
+    );
+  },
+
   getRegistryCount: () => {
     return resourceMap.size;
+  },
+
+  getResource: (resourceName) => {
+    return resourceMap.get(resourceName)?.publicApi();
   },
 
   registerResource: (resourceName) => {
@@ -16,15 +27,7 @@ const Registry = {
     }
     resourceMap.set(resourceName, new RegistryResource({ name: resourceName }));
 
-    return resourceMap.get(resourceName);
-  },
-
-  getRegistry: () => {
-    return resourceMap;
-  },
-
-  getResource: (resourceName) => {
-    return resourceMap.get(resourceName);
+    return Registry.getResource(resourceName);
   },
 
   /* Use these to set up/fetch a custom render function for a specific field on a resource.
@@ -33,7 +36,8 @@ const Registry = {
    * or displaying data from two or more fields as a single string, it can be useful.
    */
   setRenderFunction: (resourceName, fieldName, func) => {
-    const resource = resourceMap.get(resourceName);
+    const resource = Registry.getResource(resourceName);
+
     if (!resource) {
       throw new RegistryException(`No resource with resourceName (${resourceName}) exists in the registry`);
     }
@@ -41,7 +45,7 @@ const Registry = {
   },
 
   getRenderFunction: (resourceName, fieldName) => {
-    const resource = resourceMap.get(resourceName);
+    const resource = Registry.getResource(resourceName);
     if (!resource) {
       return undefined;
     }
